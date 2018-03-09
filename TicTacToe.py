@@ -55,5 +55,5 @@ while (not game.winner):
     except AssertionError:
         print("That box is already taken! You can't play there.")
 
-print("Congratulations player {}, you won!".format("X" if game.player == "O" else "O"))
+print("Congratulations player {}, you won!".format(game.winner))
 game.print_board()
