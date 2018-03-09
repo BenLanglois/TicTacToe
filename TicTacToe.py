@@ -22,6 +22,10 @@ class Board():
             elif set(line) == {"O"}: return "O"
         return None
 
+    @property
+    def gameover(self):
+        return self.winner != None or " " not in self.boxes
+
     def print_board(self):
         print("\n\n\n" + ("\n--+---+--\n").join(" | ".join(box for box in row) for row in self.rows) + "\n\n\n")
 
@@ -44,7 +48,7 @@ print("""\n\n
 print("Okay, let's start.")
 game = Board()
 
-while (not game.winner):
+while (not game.gameover):
     game.print_board()
     print("Player {}, it's your turn!".format(game.player))
     move = input("Choose a box to play in: ")
@@ -55,5 +59,9 @@ while (not game.winner):
     except AssertionError:
         print("That box is already taken! You can't play there.")
 
-print("Congratulations player {}, you won!".format(game.winner))
+winner = game.winner
+if winner:
+    print("Congratulations player {}, you won!".format(winner))
+else:
+    print("Tie game!")
 game.print_board()
